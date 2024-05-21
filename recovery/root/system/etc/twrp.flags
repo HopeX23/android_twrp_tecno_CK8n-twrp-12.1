@@ -1,0 +1,20 @@
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+# mount point		fs		device						device2			 device3			flags
+# User writeable partitions
+/boot			emmc		/dev/block/by-name/boot											flags=display=boot;slotselect;backup;flashimg
+/vbmeta			emmc		/dev/block/by-name/vbmeta										flags=display=vbmeta;slotselect;backup;flashimg
+/vbmeta_system		emmc		/dev/block/by-name/vbmeta_system									flags=display=vbmeta_system;slotselect;backup;flashimg
+/vbmeta_vendor		emmc		/dev/block/by-name/vbmeta_vendor									flags=display=vbmeta_vendor;slotselect;backup;flashimg
+
+# IMEI and modem related
+/nvdata			ext4		/dev/block/by-name/nvdata										flags=display=nvdata;backup
+/protect_f		ext4		/dev/block/by-name/protect1										flags=display=protect_f;backup
+/protect_s		ext4		/dev/block/by-name/protect2										flags=display=protect_s;backup
+/nvram			emmc		/dev/block/by-name/nvram										flags=display=nvram;backup
+
+# Removable Storage
+/external_sd		auto		/dev/block/mmcblk1p1				/dev/block/mmcblk0p1					flags=display="Micro SD Card";storage;wipeingui;removable;backup=0
+/usb_otg		auto		/dev/block/sda1					/dev/block/sda		/dev/block/sdd1			flags=display="USB-OTG";storage;wipeingui;removable;backup=0
